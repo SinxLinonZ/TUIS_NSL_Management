@@ -23,3 +23,10 @@ Route::get('/home', 'HomeController@index')->name('home');
 Route::get('/home/nsl', 'HomeController@nsl')->name('nsl');
 Route::get('/home/myip', 'HomeController@myip')->name('myip');
 Route::get('/home/profile', 'HomeController@profile')->name('profile');
+
+Route::post('/home/myip/add', 'IPController@add')->name('add');
+Route::post('/home/myip/del', 'IPController@del')->name('del');
+Route::post('/home/myip/edit', 'IPController@edit')->name('edit');
+
+Route::post('/home/nsl/del', 'IPController@del_admin')->name('del_admin');
+Route::post('/home/nsl/edit', 'IPController@edit_admin')->name('edit_admin');

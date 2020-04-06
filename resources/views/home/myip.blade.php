@@ -10,10 +10,10 @@
             <sidenav></sidenav>
 
             @if (session('status'))
-                <div class="alert alert-success" role="alert">
-                    {{ session('status') }}
-                </div>
-                @endif
+            <div class="alert alert-success" role="alert">
+              {{ session('status') }}
+            </div>
+            @endif
         </div>
 
         <div class="col-md-9">
@@ -32,17 +32,20 @@
                     </tr>
                   </thead>
                   <tbody>
-      
-                      <tr>
-                          <td>172.22.1.1</td>
-                          <td>iseki-alice</td>
-                          <td>2020-04-04 23:24:38</td>
-                          <td>
-                              <a href="#">Edit</a>
-                              &nbsp;
-                              <a href="#">Delete</a>
-                          </td>
-                      </tr>
+                    
+                    @foreach ($ips as $ip)
+                    <tr>
+                      
+                      <td>{{ $ip->address }}</td>
+                      <td id="hostname-{{ $ip->id }}">{{ $ip->hostname }}</td>
+                      <td>{{ $ip->updated_at }}</td>
+                      <td>
+                        <myipedit tagid="{{ $ip->id }}"></myipedit>
+                      </td>
+
+                    </tr>
+                    @endforeach
+                    
       
                   </tbody>
               </table>
@@ -53,18 +56,21 @@
                 </div>
               </div>
 
+              
+              <!-- Add IP Modal -->
               <div class="modal fade" id="addIp">
                 <div class="modal-dialog">
                   <div class="modal-content">
                
+
                     <div class="modal-header">
                       <h4 class="modal-title">Add New IP</h4>
                       <button type="button" class="close" data-dismiss="modal">&times;</button>
                     </div>
                
                     <div class="modal-body">
-                      
-                      <form method="POST" action="#">
+
+                      <form method="POST" action="/home/myip/add">
                         @csrf
 
                         <div class="form-group row">
@@ -77,6 +83,7 @@
                                     <span class="invalid-feedback" role="alert">
                                         <strong>{{ $message }}</strong>
                                     </span>
+                                    <sessionerr err="ip-addr"></sessionerr>
                                 @enderror
                             </div>
                         </div>
@@ -104,11 +111,123 @@
                             </div>
                         </div>
                     </form>
+                    @error('ip-registered')
+                      <div class="alert alert-danger mt-4">
+                        <h6>{{ $message }}</h6>
+                        <sessionerr err="ip-registered"></sessionerr>
+                      </div>
+                    @enderror
                     </div>
                
                   </div>
                 </div>
               </div>
+
+              
+              <!-- Delete IP Modal -->
+              <div class="modal fade" id="delIp">
+                <div class="modal-dialog">
+                  <div class="modal-content">
+               
+
+                    <div class="modal-header">
+                      <h4 class="modal-title">Delete IP</h4>
+                      <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    </div>
+               
+                    <div class="modal-body">
+                      <h5 style="text-align: center">Register to stop using this IP?</h5>
+
+                      <form method="POST" action="/home/myip/del">
+                        @csrf
+
+                        <input class="mb-4" style="display:block; margin: auto" id="del-ip" type="text" value="" name="del-ip" readonly>
+
+
+                          <button style="display:block; margin: auto" type="submit" class="btn btn-danger">
+                              {{ __('Delete') }}
+                          </button>
+
+                      </form>
+                    @error('del-err')
+                      <div class="alert alert-danger mt-4">
+                        <h6>{{ $message }}</h6>
+                        <sessionerr err="del-err"></sessionerr>
+                      </div>
+                    @enderror
+                    </div>
+               
+                  </div>
+                </div>
+            </div>
+
+            
+            <!-- Edit IP Modal -->
+            <div class="modal fade" id="editIp">
+              <div class="modal-dialog">
+                <div class="modal-content">
+             
+
+                  <div class="modal-header">
+                    <h4 class="modal-title">Edit IP</h4>
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                  </div>
+             
+                  <div class="modal-body">
+
+                    <form method="POST" action="/home/myip/edit">
+                      @csrf
+
+                      <div class="form-group row">
+                          <label for="edit-ip" class="col-md-4 col-form-label text-md-right">{{ __('IP address') }}</label>
+
+                          <div class="col-md-6">
+                              <input id="edit-ip" type="text" class="form-control @error('edit-ip') is-invalid @enderror" name="edit-ip" value="{{ old('edit-ip') }}" required readonly>
+
+                              @error('edit-ip')
+                                  <span class="invalid-feedback" role="alert">
+                                      <strong>{{ $message }}</strong>
+                                  </span>
+                                  <sessionerr err="edit-ip"></sessionerr>
+                              @enderror
+                          </div>
+                      </div>
+
+                      <div class="form-group row">
+                        <label for="edit-hostname" class="col-md-4 col-form-label text-md-right">{{ __('Hostname') }}</label>
+
+                        <div class="col-md-6">
+                            <input id="edit-hostname" type="text" class="form-control @error('edit-hostname') is-invalid @enderror" name="edit-hostname" value="{{ old('edit-hostname') }}" required autocomplete="edit-hostname" autofocus>
+
+                            @error('edit-hostname')
+                                <span class="invalid-feedback" role="alert">
+                                    <strong>{{ $message }}</strong>
+                                </span>
+                            @enderror
+                        </div>
+                      </div>
+
+                      <div class="form-group row mb-0">
+                          <div class="col-md-2 offset-md-5">
+                              <button type="submit" class="btn btn-primary">
+                                  {{ __('Save') }}
+                              </button>
+
+                          </div>
+                      </div>
+                  </form>
+                  @error('edit-err')
+                    <div class="alert alert-danger mt-4">
+                      <h6>{{ $message }}</h6>
+                      <sessionerr err="edit-err"></sessionerr>
+                    </div>
+                  @enderror
+                  </div>
+             
+                </div>
+              </div>
+            </div>
+            
 
             </div>
           </div>

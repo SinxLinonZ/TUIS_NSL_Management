@@ -32,9 +32,9 @@
                             </div>
                             <div>
                                 <h5>
-                                    <strong>Student </strong>
+                                    <strong>{{ $user->role->role_name ?? "Undefined" }} </strong>
                                     of
-                                    <strong>XXX Lab</strong>
+                                    <strong>{{ $user->lab->lab_name ?? "Undefined" }} Lab</strong>
                                 </h5>
                                 <hr>
                                 <current-time></current-time>
@@ -51,13 +51,22 @@
                             
                             <h4>
                                 You have 
-                                <a class="text-dark" href="#"><strong>4</strong></a> 
+                                <a class="text-dark" href="/home/myip">
+                                    <strong>{{ $user->IPs()->count() }}</strong>
+                                </a> 
                                 host(s)/IP(s)
                             </h4>
                             <hr>
-                            <h6>172.22.1.20</h6>
-                            <h6>172.22.1.20</h6>
-                            <h6>172.22.1.20</h6>
+
+                            <div class="row">
+                                @foreach ($user->IPs as $ip)
+                                <div class="col-md-4">
+                                    <h5>{{ $ip->address }}</h5>
+                                </div>
+                                @endforeach
+                            </div>
+
+                            
                         </div>
                     </div>
                 </div>
@@ -119,7 +128,12 @@
                                             </tr>
                                         </tbody>
                                     </table>
-                                        
+                              
+                                    <nsloverview 
+                                    registeredips="@foreach ($registeredips as $registeredip){{ $registeredip }},@endforeach" 
+                                    ipusers="@foreach ($ipUsers as $ipUser){{ $ipUser }},@endforeach">
+                                    </nsloverview>
+
                                 </div>
                             </div>
 

@@ -79,23 +79,23 @@ trait AuthenticatesUsers
      */
     protected function attemptLogin(Request $request)
     {
-/*
-        return $this->guard()->attempt(
-            $this->credentials($request), $request->filled('remember')
-        );
-*/
 
         $user = User::where('tuisid', $request->tuisid)->first();
-
         if ($user == null) {
             return false;
         }
         
-        return $this->guard()->loginUsingId(
-            User::where('tuisid', $request->tuisid)->first()->id, $request->filled('remember')
-        );
+//        return $this->guard()->loginUsingId(
+//            User::where('tuisid', $request->tuisid)->first()->id, $request->filled('remember')
+//        );
         
-        $connection = ssh2_connect('gateway.edu.tuis.ac.jp', 22);
+        if ($user->tuisid == 'administrator') {
+            return $this->guard()->attempt(
+                $this->credentials($request), $request->filled('remember')
+            );
+        }
+
+        $connection = ssh2_connect('202.26.144.41', 22);
 
         if (@ssh2_auth_password($connection, $user->tuisid, $request->password)) {
             return $this->guard()->loginUsingId(

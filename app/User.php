@@ -16,7 +16,7 @@ class User extends Authenticatable
      * @var array
      */
     protected $fillable = [
-        'name', 'tuisid', 'password',
+        'name', 'tuisid', 'password', 'role_id', 'lab_id',
     ];
 
     /**
@@ -36,4 +36,17 @@ class User extends Authenticatable
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
+
+    
+    public function Lab() {
+        return $this->belongsTo(Lab::class);
+    }
+
+    public function Role() {
+        return $this->belongsTo(Role::class);
+    }
+
+    public function IPs() {
+        return $this->hasMany(IP::class);
+    }
 }

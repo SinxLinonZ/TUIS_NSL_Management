@@ -24,15 +24,11 @@
             <hr>
             
             <li class="nav-item">
-                <a class="nav-link" id="admin-ipm" v-bind:href="admin_ipm">IP Addr.s Management</a>
+                <a class="nav-link" id="admin-stum" v-bind:href="admin_stum">Students Management(Under Build)</a>
             </li>
             
             <li class="nav-item">
-                <a class="nav-link" id="admin-stum" v-bind:href="admin_stum">Students Management</a>
-            </li>
-            
-            <li class="nav-item">
-                <a class="nav-link" id="admin-sysm" v-bind:href="admin_sysm">System Properties</a>
+                <a class="nav-link" id="admin-sysm" v-bind:href="admin_sysm">System Properties(Under Build)</a>
             </li>
 
         </ul>
@@ -44,7 +40,7 @@
 <script>
     export default {
         mounted() {
-            console.log('Component mounted.')
+            console.log('Component sidenav mounted.')
             this.initnav()
         },
 
@@ -70,9 +66,10 @@
                 nsl: "/home/nsl",
                 myip: "/home/myip",
                 profile: "/home/profile",
-                admin_ipm: "/home/admin/ipm",
-                admin_stum: "/home/admin/stum",
-                admin_sysm: "/home/admin/sysm",
+//                admin_stum: "/home/admin/stum",
+//                admin_sysm: "/home/admin/sysm",
+                admin_stum: "#",
+                admin_sysm: "#",
             }
         }
     }
