@@ -85,13 +85,21 @@ trait AuthenticatesUsers
         );
 */
 
-        $user = User::where('studentid', $request->studentid)->firstOrFail();
+        $user = User::where('tuisid', $request->tuisid)->first();
 
-        $connection = ssh2_connect('192.168.0.21', 22);
+        if ($user == null) {
+            return false;
+        }
+        
+        return $this->guard()->loginUsingId(
+            User::where('tuisid', $request->tuisid)->first()->id, $request->filled('remember')
+        );
+        
+        $connection = ssh2_connect('gateway.edu.tuis.ac.jp', 22);
 
-        if (@ssh2_auth_password($connection, $user->studentid, $request->password)) {
+        if (@ssh2_auth_password($connection, $user->tuisid, $request->password)) {
             return $this->guard()->loginUsingId(
-                User::where('studentid', $request->studentid)->first()->id, $request->filled('remember')
+                User::where('tuisid', $request->tuisid)->first()->id, $request->filled('remember')
             );
         }
 
@@ -164,7 +172,7 @@ trait AuthenticatesUsers
      */
     public function username()
     {
-        return 'studentid';
+        return 'tuisid';
     }
 
     /**

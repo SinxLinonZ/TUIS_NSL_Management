@@ -20,3 +20,6 @@ Route::get('/', function () {
 Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
+Route::get('/home/nsl', 'HomeController@nsl')->name('nsl');
+Route::get('/home/myip', 'HomeController@myip')->name('myip');
+Route::get('/home/profile', 'HomeController@profile')->name('profile');
