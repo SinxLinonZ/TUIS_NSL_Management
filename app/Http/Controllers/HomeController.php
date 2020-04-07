@@ -4,8 +4,10 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Carbon\Carbon;
 use App\User;
 use App\IP;
+use App\Lab;
 
 class HomeController extends Controller
 {
@@ -65,8 +67,29 @@ class HomeController extends Controller
 
     public function profile() 
     {
-        return view('home.profile');
+        $user = auth()->user();
+
+        $labs = Lab::all();
+
+        return view('home.profile', compact('user', 'labs'));
+    }
+
+    public function edit() {
+        $user = auth()->user();
+        $data = request()->validate([
+            'name' => 'required',
+            'tuisid' => '',
+            'role' => '',
+            'lab' => ''
+        ]);
+
+        DB::table('users')
+        ->where('id', $user->id)
+        ->update(['name' => $data['name'],
+                  'updated_at' => Carbon::now()
+                ]);
+    
+        return redirect("/home/profile");
+
     }
 }
-
-

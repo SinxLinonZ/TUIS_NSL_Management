@@ -12,14 +12,11 @@
         props:['err'],
 
         methods: {
-
             detect() {
                 if (this.err == 'ip-addr' || this.err == 'ip-registered') {
                     this.reopenAddIpModal()
-                } else if (this.err == 'del-err') {
-                    this.reopenDelIpModal()
-                } else if (this.err == 'edit-err') {
-                    this.reopenEditIpModal()
+                } else if (this.err == 'student-registered') {
+                    this.repoenAddStudentModal()
                 }
             },
 
@@ -27,13 +24,11 @@
                 $('#addIp').modal('show')
             },
 
-            reopenDelIpModal() {
-                $('#delIp').modal('show')
-            },
-            
-            reopenEditIpModal() {
-                $('#editIp').modal('show')
+            repoenAddStudentModal() {
+                $('#addStudent').modal('show')
             }
+
+            
         
         }
     }

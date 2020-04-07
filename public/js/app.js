@@ -2087,20 +2087,15 @@ __webpack_require__.r(__webpack_exports__);
     detect: function detect() {
       if (this.err == 'ip-addr' || this.err == 'ip-registered') {
         this.reopenAddIpModal();
-      } else if (this.err == 'del-err') {
-        this.reopenDelIpModal();
-      } else if (this.err == 'edit-err') {
-        this.reopenEditIpModal();
+      } else if (this.err == 'student-registered') {
+        this.repoenAddStudentModal();
       }
     },
     reopenAddIpModal: function reopenAddIpModal() {
       $('#addIp').modal('show');
     },
-    reopenDelIpModal: function reopenDelIpModal() {
-      $('#delIp').modal('show');
-    },
-    reopenEditIpModal: function reopenEditIpModal() {
-      $('#editIp').modal('show');
+    repoenAddStudentModal: function repoenAddStudentModal() {
+      $('#addStudent').modal('show');
     }
   }
 });
@@ -2116,6 +2111,7 @@ __webpack_require__.r(__webpack_exports__);
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
+//
 //
 //
 //
@@ -2179,11 +2175,54 @@ __webpack_require__.r(__webpack_exports__);
       nsl: "/home/nsl",
       myip: "/home/myip",
       profile: "/home/profile",
-      //                admin_stum: "/home/admin/stum",
-      //                admin_sysm: "/home/admin/sysm",
-      admin_stum: "#",
-      admin_sysm: "#"
+      admin_stum: "/admin/stum" //                admin_sysm: "/home/admin/sysm",
+      //                admin_stum: "#",
+      //                admin_sysm: "#",
+
     };
+  }
+});
+
+/***/ }),
+
+/***/ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/stumEdit.vue?vue&type=script&lang=js&":
+/*!*******************************************************************************************************************************************************************!*\
+  !*** ./node_modules/babel-loader/lib??ref--4-0!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/stumEdit.vue?vue&type=script&lang=js& ***!
+  \*******************************************************************************************************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+/* harmony default export */ __webpack_exports__["default"] = ({
+  mounted: function mounted() {
+    console.log('Component myip action button mounted.');
+  },
+  props: ['studentname'],
+  methods: {
+    delActive: function delActive(studentname) {
+      $("#del-student").val(studentname);
+    }
   }
 });
 
@@ -37810,23 +37849,66 @@ var render = function() {
           "a",
           {
             staticClass: "nav-link",
-            attrs: { id: "admin-stum", href: _vm.admin_stum }
+            attrs: { id: "admin_stum", href: _vm.admin_stum }
           },
-          [_vm._v("Students Management(Under Build)")]
-        )
-      ]),
-      _vm._v(" "),
-      _c("li", { staticClass: "nav-item" }, [
-        _c(
-          "a",
-          {
-            staticClass: "nav-link",
-            attrs: { id: "admin-sysm", href: _vm.admin_sysm }
-          },
-          [_vm._v("System Properties(Under Build)")]
+          [_vm._v("Students Management")]
         )
       ])
     ])
+  ])
+}
+var staticRenderFns = []
+render._withStripped = true
+
+
+
+/***/ }),
+
+/***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/stumEdit.vue?vue&type=template&id=26ddbe2e&":
+/*!***********************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/stumEdit.vue?vue&type=template&id=26ddbe2e& ***!
+  \***********************************************************************************************************************************************************************************************************/
+/*! exports provided: render, staticRenderFns */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "render", function() { return render; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return staticRenderFns; });
+var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _c("div", [
+    _c(
+      "a",
+      {
+        attrs: {
+          href: "/admin/stum/" + _vm.studentname,
+          id: "edit-" + _vm.studentname
+        }
+      },
+      [_vm._v("\n    Details")]
+    ),
+    _vm._v("\n\n     \n    "),
+    _c(
+      "a",
+      {
+        attrs: {
+          type: "button",
+          "data-toggle": "modal",
+          "data-target": "#delStudent",
+          href: "#",
+          id: "del-" + _vm.studentname
+        },
+        on: {
+          click: function($event) {
+            return _vm.delActive(_vm.studentname)
+          }
+        }
+      },
+      [_vm._v("\n    Delete")]
+    )
   ])
 }
 var staticRenderFns = []
@@ -50024,6 +50106,7 @@ Vue.component('nsloverview', __webpack_require__(/*! ./components/nslOverview.vu
 Vue.component('sessionerr', __webpack_require__(/*! ./components/sessionErr.vue */ "./resources/js/components/sessionErr.vue")["default"]);
 Vue.component('myipedit', __webpack_require__(/*! ./components/myipEdit.vue */ "./resources/js/components/myipEdit.vue")["default"]);
 Vue.component('nsledit', __webpack_require__(/*! ./components/nslEdit.vue */ "./resources/js/components/nslEdit.vue")["default"]);
+Vue.component('stumedit', __webpack_require__(/*! ./components/stumEdit.vue */ "./resources/js/components/stumEdit.vue")["default"]);
 /**
  * Next, we will create a fresh Vue application instance and attach it to
  * the page. Then, you may begin adding components to this application
@@ -50490,6 +50573,75 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "render", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_sidenav_vue_vue_type_template_id_52c8b81e___WEBPACK_IMPORTED_MODULE_0__["render"]; });
 
 /* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_sidenav_vue_vue_type_template_id_52c8b81e___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"]; });
+
+
+
+/***/ }),
+
+/***/ "./resources/js/components/stumEdit.vue":
+/*!**********************************************!*\
+  !*** ./resources/js/components/stumEdit.vue ***!
+  \**********************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _stumEdit_vue_vue_type_template_id_26ddbe2e___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./stumEdit.vue?vue&type=template&id=26ddbe2e& */ "./resources/js/components/stumEdit.vue?vue&type=template&id=26ddbe2e&");
+/* harmony import */ var _stumEdit_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./stumEdit.vue?vue&type=script&lang=js& */ "./resources/js/components/stumEdit.vue?vue&type=script&lang=js&");
+/* empty/unused harmony star reexport *//* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
+
+
+
+
+
+/* normalize component */
+
+var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__["default"])(
+  _stumEdit_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__["default"],
+  _stumEdit_vue_vue_type_template_id_26ddbe2e___WEBPACK_IMPORTED_MODULE_0__["render"],
+  _stumEdit_vue_vue_type_template_id_26ddbe2e___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"],
+  false,
+  null,
+  null,
+  null
+  
+)
+
+/* hot reload */
+if (false) { var api; }
+component.options.__file = "resources/js/components/stumEdit.vue"
+/* harmony default export */ __webpack_exports__["default"] = (component.exports);
+
+/***/ }),
+
+/***/ "./resources/js/components/stumEdit.vue?vue&type=script&lang=js&":
+/*!***********************************************************************!*\
+  !*** ./resources/js/components/stumEdit.vue?vue&type=script&lang=js& ***!
+  \***********************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_stumEdit_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../node_modules/babel-loader/lib??ref--4-0!../../../node_modules/vue-loader/lib??vue-loader-options!./stumEdit.vue?vue&type=script&lang=js& */ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/stumEdit.vue?vue&type=script&lang=js&");
+/* empty/unused harmony star reexport */ /* harmony default export */ __webpack_exports__["default"] = (_node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_stumEdit_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__["default"]); 
+
+/***/ }),
+
+/***/ "./resources/js/components/stumEdit.vue?vue&type=template&id=26ddbe2e&":
+/*!*****************************************************************************!*\
+  !*** ./resources/js/components/stumEdit.vue?vue&type=template&id=26ddbe2e& ***!
+  \*****************************************************************************/
+/*! exports provided: render, staticRenderFns */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_stumEdit_vue_vue_type_template_id_26ddbe2e___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../node_modules/vue-loader/lib??vue-loader-options!./stumEdit.vue?vue&type=template&id=26ddbe2e& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/stumEdit.vue?vue&type=template&id=26ddbe2e&");
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "render", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_stumEdit_vue_vue_type_template_id_26ddbe2e___WEBPACK_IMPORTED_MODULE_0__["render"]; });
+
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_stumEdit_vue_vue_type_template_id_26ddbe2e___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"]; });
 
 
 

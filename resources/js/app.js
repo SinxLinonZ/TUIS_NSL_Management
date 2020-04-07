@@ -25,6 +25,7 @@ Vue.component('nsloverview', require('./components/nslOverview.vue').default);
 Vue.component('sessionerr', require('./components/sessionErr.vue').default);
 Vue.component('myipedit', require('./components/myipEdit.vue').default);
 Vue.component('nsledit', require('./components/nslEdit.vue').default);
+Vue.component('stumedit', require('./components/stumEdit.vue').default);
 
 /**
  * Next, we will create a fresh Vue application instance and attach it to

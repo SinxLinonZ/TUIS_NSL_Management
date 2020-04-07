@@ -24,13 +24,14 @@
             <hr>
             
             <li class="nav-item">
-                <a class="nav-link" id="admin-stum" v-bind:href="admin_stum">Students Management(Under Build)</a>
+                <a class="nav-link" id="admin_stum" v-bind:href="admin_stum">Students Management</a>
             </li>
             
+<!--
             <li class="nav-item">
-                <a class="nav-link" id="admin-sysm" v-bind:href="admin_sysm">System Properties(Under Build)</a>
+                <a class="nav-link" id="admin-sysm" v-bind:href="admin_sysm">System Properties</a>
             </li>
-
+-->
         </ul>
 
     </nav>
@@ -66,10 +67,10 @@
                 nsl: "/home/nsl",
                 myip: "/home/myip",
                 profile: "/home/profile",
-//                admin_stum: "/home/admin/stum",
+                admin_stum: "/admin/stum",
 //                admin_sysm: "/home/admin/sysm",
-                admin_stum: "#",
-                admin_sysm: "#",
+//                admin_stum: "#",
+//                admin_sysm: "#",
             }
         }
     }

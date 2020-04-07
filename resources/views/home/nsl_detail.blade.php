@@ -22,8 +22,10 @@
                   <tr>
                     <th>IP</th>
                     <th>Host name</th>
+                    <th>Description</th>
                     <th>Using by</th>
                     <th>of Lab.</th>
+                    <th>Modified at</th>
                     @if ($user->role->role_name == 'Admin' || $user->role->role_name == 'Teacher')
                     <th>Action</th>
                     @endif
@@ -34,7 +36,8 @@
                     @for ($i = 0; $i < 254; $i++)
                     <tr>
                         <td>172.22.1.{{$i+1}}</td>
-                        <td>{{ $ips[$i]->hostname}}</td>
+                        <td id="hostname-{{ $i+1 }}">{{ $ips[$i]->hostname}}</td>
+                        <td>{{ $ips[$i]->description }}</td>
                         <td>
                             {{ $ips[$i]->user['name'] }}
 
@@ -44,6 +47,12 @@
 
                         </td>
                         <td>{{ $ips[$i]->user['lab']['lab_name'] }}</td>
+                        @if ($ips[$i]->user['name'])
+                        <td>{{ $ips[$i]->updated_at }}</td>
+                        @else
+                        <td></td>
+                        @endif
+                        
                         @if ($user->role->role_name == 'Admin' || $user->role->role_name == 'Teacher')
                         <td>
                           <nsledit
@@ -57,7 +66,7 @@
                 </tbody>
             </table>
             
-            
+            @if ($user->role->role_name == 'Admin' || $user->role->role_name == 'Teacher')
             <!-- Delete IP Modal -->
             <div class="modal fade" id="delIp">
               <div class="modal-dialog">
@@ -75,7 +84,7 @@
                     <form method="POST" action="/home/nsl/del">
                       @csrf
 
-                      <input class="mb-4" style="display:block; margin: auto" id="del-ip" type="text" value="" name="del-ip" readonly>
+                      <input class="mb-4" style="display:block; margin: auto; text-align:center;" id="del-ip" type="text" value="" name="del-ip" readonly>
 
 
                         <button style="display:block; margin: auto" type="submit" class="btn btn-danger">
@@ -83,17 +92,14 @@
                         </button>
 
                     </form>
-                  @error('del-err')
-                    <div class="alert alert-danger mt-4">
-                      <h6>{{ $message }}</h6>
-                      <sessionerr err="del-err"></sessionerr>
-                    </div>
-                  @enderror
+
                   </div>
              
                 </div>
               </div>
           </div>
+          <!-- End of Delete IP Modal -->
+          
 
           
           <!-- Edit IP Modal -->
@@ -147,9 +153,16 @@
                         <div class="col-md-6">
                             <!--<input id="edit-usingUser" type="text" class="form-control @error('edit-usingUser') is-invalid @enderror" name="edit-usingUser" value="{{ old('edit-usingUser') }}" required autocomplete="edit-usingUser" autofocus>-->
                             <select class="form-control" id="edit-usingUser" name="edit-usingUser">
-                                @foreach ($all_user as $available_user)
+                                
+                              @foreach ($all_user as $available_user)
+                              @if ($available_user->lab_id == $user->lab_id &&
+                                   $available_user->role->role_name != 'Admin')
                                 <option>{{$available_user->name}}</option>
-                                @endforeach
+                              @elseif ($user->role->role_name == 'Admin')
+                              <option>{{$available_user->name}}</option>
+                              @endif
+                              @endforeach
+                              
                               </select>
                             @error('edit-usingUser')
                                 <span class="invalid-feedback" role="alert">
@@ -159,6 +172,13 @@
                         </div>
                       </div>
 
+                      <div class="form-group row">
+                        <label for="description" class="col-md-4 col-form-label text-md-right">{{ __('Description') }}</label>
+        
+                        <div class="col-md-6">
+                            <input id="description" type="text" class="form-control @error('description') is-invalid @enderror" name="description" value="{{ old('description') }}" autocomplete="description">
+                        </div>
+                      </div>
                       
                     <div class="form-group row mb-0">
                         <div class="col-md-2 offset-md-5">
@@ -169,17 +189,14 @@
                         </div>
                     </div>
                 </form>
-                @error('edit-err')
-                  <div class="alert alert-danger mt-4">
-                    <h6>{{ $message }}</h6>
-                    <sessionerr err="edit-err"></sessionerr>
-                  </div>
-                @enderror
                 </div>
            
               </div>
             </div>
           </div>
+          <!-- End of Edit IP Modal -->
+          @endif
+          
 
 
 

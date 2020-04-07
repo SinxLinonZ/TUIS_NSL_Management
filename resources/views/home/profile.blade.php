@@ -26,8 +26,8 @@
                 <div class="col-md-2 offset-2">
                   <h4>Name:</h4>
                 </div>
-                <div class="col-md-2">
-                  <h4>h-kys</h4>
+                <div class="col-md-6">
+                  <h4>{{ $user->name }}</h4>
                 </div>
               </div>
 
@@ -35,8 +35,8 @@
                 <div class="col-md-2 offset-2">
                   <h4>TUIS ID:</h4>
                 </div>
-                <div class="col-md-2">
-                  <h4>j19478sr</h4>
+                <div class="col-md-6">
+                  <h4>{{ $user->tuisid }}</h4>
                 </div>
               </div>
 
@@ -44,8 +44,8 @@
                 <div class="col-md-2 offset-2">
                   <h4>Role:</h4>
                 </div>
-                <div class="col-md-2">
-                  <h4>Studnet</h4>
+                <div class="col-md-6">
+                  <h4>{{ $user->role->role_name }}</h4>
                 </div>
               </div>
 
@@ -53,8 +53,8 @@
                 <div class="col-md-2 offset-2">
                   <h4>Lab:</h4>
                 </div>
-                <div class="col-md-2">
-                  <h4>Moriguchi</h4>
+                <div class="col-md-6">
+                  <h4>{{ $user->lab->lab_name }}</h4>
                 </div>
               </div>
 
@@ -64,6 +64,8 @@
                 </div>
               </div>
 
+
+              <!-- Edit Profile Modal -->
               <div class="modal fade" id="editProfile">
                 <div class="modal-dialog">
                   <div class="modal-content">
@@ -75,14 +77,14 @@
                
                     <div class="modal-body">
 
-                      <form method="POST" action="#">
+                      <form method="POST" action="/home/profile">
                         @csrf
 
                         <div class="form-group row">
                             <label for="name" class="col-md-4 col-form-label text-md-right">{{ __('Name') }}</label>
 
                             <div class="col-md-6">
-                                <input id="name" type="text" class="form-control @error('name') is-invalid @enderror" name="name" value="{{ old('name') }}" required autocomplete="name" autofocus>
+                                <input id="name" type="text" class="form-control @error('name') is-invalid @enderror" name="name" value="{{ old('name') ?? $user->name }}" required autocomplete="name" autofocus>
 
                                 @error('name')
                                     <span class="invalid-feedback" role="alert">
@@ -96,7 +98,7 @@
                           <label for="tuisid" class="col-md-4 col-form-label text-md-right">{{ __('TUIS ID') }}</label>
 
                           <div class="col-md-6">
-                              <input id="tuisid" type="text" class="form-control @error('tuisid') is-invalid @enderror" name="tuisid" value="{{ old('tuisid') }}" required autocomplete="tuisid" readonly>
+                              <input id="tuisid" type="text" class="form-control @error('tuisid') is-invalid @enderror" name="tuisid" value="{{ old('tuisid') ?? $user->tuisid }}" required autocomplete="tuisid" readonly>
 
                               @error('tuisid')
                                   <span class="invalid-feedback" role="alert">
@@ -110,7 +112,7 @@
                           <label for="role" class="col-md-4 col-form-label text-md-right">{{ __('Role') }}</label>
 
                           <div class="col-md-6">
-                              <input id="role" type="text" class="form-control @error('role') is-invalid @enderror" name="role" value="{{ old('role') }}" required autocomplete="role" readonly>
+                              <input id="role" type="text" class="form-control @error('role') is-invalid @enderror" name="role" value="{{ old('role') ?? $user->role->role_name }}" required autocomplete="role" readonly>
                             
                               @error('role')
                                   <span class="invalid-feedback" role="alert">
@@ -124,12 +126,8 @@
                           <label for="lab" class="col-md-4 col-form-label text-md-right">{{ __('Lab') }}</label>
 
                           <div class="col-md-6">
-                            <!--  <input id="lab" type="text" class="form-control @error('lab') is-invalid @enderror" name="lab" value="{{ old('lab') }}" required autocomplete="lab"> -->
                             <select class="form-control" id="lab">
-                              <option>Moriguchi</option>
-                              <option>Iseki</option>
-                              <option>Hanada</option>
-                              <option>NetTech</option>
+                                <option readonly>{{ $user->lab->lab_name }}</option>
                             </select>
 
                               @error('lab')
@@ -157,6 +155,8 @@
                   </div>
                 </div>
               </div>
+              <!-- End of Edit Profile Modal -->
+              
 
             </div>
           </div>

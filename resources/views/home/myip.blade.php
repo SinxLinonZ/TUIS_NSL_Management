@@ -102,6 +102,14 @@
                           </div>
                         </div>
 
+                        <div class="form-group row">
+                          <label for="description" class="col-md-4 col-form-label text-md-right">{{ __('Description') }}</label>
+          
+                          <div class="col-md-6">
+                              <input id="description" type="text" class="form-control @error('description') is-invalid @enderror" name="description" value="{{ old('description') }}" autocomplete="description">
+                          </div>
+                        </div>
+
                         <div class="form-group row mb-0">
                             <div class="col-md-2 offset-md-5">
                                 <button type="submit" class="btn btn-primary">
@@ -149,12 +157,6 @@
                           </button>
 
                       </form>
-                    @error('del-err')
-                      <div class="alert alert-danger mt-4">
-                        <h6>{{ $message }}</h6>
-                        <sessionerr err="del-err"></sessionerr>
-                      </div>
-                    @enderror
                     </div>
                
                   </div>
@@ -207,6 +209,14 @@
                         </div>
                       </div>
 
+                      <div class="form-group row">
+                        <label for="description" class="col-md-4 col-form-label text-md-right">{{ __('Description') }}</label>
+        
+                        <div class="col-md-6">
+                            <input id="description" type="text" class="form-control @error('description') is-invalid @enderror" name="description" value="{{ old('description') }}" autocomplete="description">
+                        </div>
+                      </div>
+
                       <div class="form-group row mb-0">
                           <div class="col-md-2 offset-md-5">
                               <button type="submit" class="btn btn-primary">
@@ -216,12 +226,6 @@
                           </div>
                       </div>
                   </form>
-                  @error('edit-err')
-                    <div class="alert alert-danger mt-4">
-                      <h6>{{ $message }}</h6>
-                      <sessionerr err="edit-err"></sessionerr>
-                    </div>
-                  @enderror
                   </div>
              
                 </div>

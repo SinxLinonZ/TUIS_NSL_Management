@@ -15,9 +15,11 @@ class CreateIPSTable extends Migration
     {
         Schema::create('i_p_s', function (Blueprint $table) {
             $table->id();
+            $table->string('address')->unique();
+
             $table->foreignId('user_id')->nullable();
-            $table->string('address');
-            $table->string('hostname')->unique()->nullable();
+            $table->string('hostname')->nullable();
+            $table->string('description')->nullable();
             $table->timestamps();
 
             $table->index('user_id');

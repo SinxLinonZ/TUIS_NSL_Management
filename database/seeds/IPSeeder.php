@@ -2,6 +2,7 @@
 
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
+use Carbon\Carbon;
 
 class IPSeeder extends Seeder
 {
@@ -16,7 +17,11 @@ class IPSeeder extends Seeder
         $ips_array = array();
 
         for ($i=1; $i <= 255; $i++) { 
-            $ip = array("address" => "172.22.1.$i");
+            $ip = array(
+                "address" => "172.22.1.$i",
+                'created_at' => Carbon::now(),
+                'updated_at' => Carbon::now()
+            );
             array_push($ips_array, $ip);
         }
 
