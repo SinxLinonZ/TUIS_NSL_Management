@@ -4,7 +4,7 @@
         <a
         :href="'/admin/stum/' + studentname" 
         v-bind:id="'edit-' + studentname">
-        Details</a>
+        明細</a>
 
         &nbsp;
         <a type="button" 
@@ -13,7 +13,7 @@
         href="#" 
         v-bind:id="'del-' + studentname"
         @click="delActive(studentname)">
-        Delete</a>
+        削除</a>
             
     </div>
 </template>

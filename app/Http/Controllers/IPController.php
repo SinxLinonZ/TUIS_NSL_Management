@@ -26,11 +26,11 @@ class IPController extends Controller
         $target_ip = DB::table('i_p_s')->where('address', $data['ip-addr'])->first();
 
         if ( !$target_ip ) {
-            abort(403, 'IP Not Found.');
+            abort(403, 'NSLのIPではありません');
         }
 
         if ( $target_ip->user_id && $target_ip->user_id != $user->id ) {
-            throw ValidationException::withMessages(['ip-registered' => 'This IP has been used by others']);
+            throw ValidationException::withMessages(['ip-registered' => 'このIPは他の人に使われています']);
         };
 
         DB::table('i_p_s')
@@ -55,10 +55,10 @@ class IPController extends Controller
         $target_ip = DB::table('i_p_s')->where('address', $data['edit-ip'])->first();
     
         if ( !$target_ip ) {
-            abort(403, 'IP Not Found.');
+            abort(403, 'NSLのIPではありません');
         }
         if ( $target_ip->user_id != $user->id ) {
-            abort(403, 'Illegal operation.');
+            abort(403, '不正操作です');
 //          throw ValidationException::withMessages(['edit-err' => 'Illegal operation']);
         };
     
@@ -82,10 +82,10 @@ class IPController extends Controller
         $target_ip = DB::table('i_p_s')->where('address', $data['del-ip'])->first();
         
         if ( !$target_ip ) {
-            abort(403, 'IP Not Found.');
+            abort(403, 'NSLのIPではありません');
         }
         if ( $target_ip->user_id != $user->id ) {
-            abort(403, 'Illegal operation.');
+            abort(403, '不正操作です');
 //          throw ValidationException::withMessages(['del-err' => 'Illegal operation']);
         };
 
@@ -106,7 +106,7 @@ class IPController extends Controller
         $user = auth()->user();
 
         if ($user->role->role_name != 'Admin' && $user->role->role_name != 'Teacher' ) {
-            abort(403, 'Illegal operation.');
+            abort(403, '不正操作です');
         }
         
         $data = request()->validate([
@@ -118,11 +118,11 @@ class IPController extends Controller
 
         $edit_user = DB::table('users')->where('name', $data['edit-usingUser'])->first();
         if ( !$edit_user ) {
-            abort(403, 'User Not Found.');
+            abort(403, 'この学生は登録されていません');
         }
         $target_ip = DB::table('i_p_s')->where('address', $data['edit-ip'])->first();
         if ( !$target_ip ) {
-            abort(403, 'IP Not Found.');
+            abort(403, 'NSLのIPではありません');
         }
 
         DB::table('i_p_s')
@@ -140,7 +140,7 @@ class IPController extends Controller
         $user = auth()->user();
 
         if ($user->role->role_name != 'Admin' && $user->role->role_name != 'Teacher' ) {
-            abort(403, 'Illegal operation.');
+            abort(403, '不正操作です');
         }
 
         $data = request()->validate([
@@ -149,7 +149,7 @@ class IPController extends Controller
 
         $target_ip = DB::table('i_p_s')->where('address', $data['del-ip'])->first();
         if ( !$target_ip ) {
-            abort(403, 'IP Not Found.');
+            abort(403, 'NSLのIPではありません');
         }
 
         DB::table('i_p_s')

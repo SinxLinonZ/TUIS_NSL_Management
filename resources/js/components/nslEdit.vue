@@ -7,7 +7,7 @@
         href="#" 
         v-bind:id="'edit-' + tagid" 
         @click="editActive(tagid)"
-        >Edit</a>
+        >編集</a>
 
         &nbsp;
         <a type="button" 
@@ -16,7 +16,7 @@
         href="#" 
         v-bind:id="'del-' + tagid"
         @click="delActive(tagid)"
-        >Delete</a>
+        >削除</a>
             
     </div>
 </template>

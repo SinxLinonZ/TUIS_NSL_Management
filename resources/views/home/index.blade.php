@@ -21,7 +21,7 @@
                 
                 <div class="col-md-6">
                     <div class="card">
-                        <div class="card-header">Profile</div>
+                        <div class="card-header">プロフィール</div>
                         <div class="card-body">
                             <div class="d-flex">
                                 <h4>
@@ -32,9 +32,10 @@
                             </div>
                             <div>
                                 <h5>
+                                    あなたは
+                                    <strong>{{ $user->lab->lab_name ?? "Undefined" }} </strong>
+                                    ゼミ所属の
                                     <strong>{{ $user->role->role_name ?? "Undefined" }} </strong>
-                                    of
-                                    <strong>{{ $user->lab->lab_name ?? "Undefined" }} Lab</strong>
                                 </h5>
                                 <hr>
                                 <current-time></current-time>
@@ -45,16 +46,15 @@
 
                 <div class="col-md-6">
                     <div class="card">
-                        <div class="card-header">My Hosts/IPs</div>
+                        <div class="card-header">所持のIP</div>
 
                         <div class="card-body">
                             
                             <h4>
-                                You have 
                                 <a class="text-dark" href="/home/myip">
                                     <strong>{{ $user->IPs()->count() }}</strong>
                                 </a> 
-                                host(s)/IP(s)
+                                個のIP/ホストが使用しています
                             </h4>
                             <hr>
 
@@ -77,7 +77,7 @@
             <div class="row">
                 <div class="col-md-12">
                     <div class="card">
-                        <div class="card-header">NSL Overview</div>
+                        <div class="card-header">NSL 概要</div>
 
                         <div class="card-body">
                             

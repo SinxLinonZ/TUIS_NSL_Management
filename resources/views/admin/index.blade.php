@@ -21,9 +21,9 @@
           <div class="card">
             <div class="card-header">
               @if ($user->lab->lab_name == 'NetTech')
-              All Students
+              全ての学生
               @else
-              Students belong to <strong>{{ $user->lab->lab_name }} lab</strong>
+              <strong>{{ $user->lab->lab_name }} ゼミ</strong>所属の学生
               @endif
             </div>
             <div class="card-body">
@@ -31,11 +31,11 @@
               <table class="table table-hover">
                   <thead>
                     <tr>
-                      <th>Student ID</th>
-                      <th>Name</th>
-                      <th>Role</th>
-                      <th>Own IP count</th>
-                      <th>Action</th>
+                      <th>学籍番号</th>
+                      <th>名前</th>
+                      <th>役割/権限</th>
+                      <th>使用中のIP数</th>
+                      <th>操作</th>
                     </tr>
                   </thead>
                   <tbody>
@@ -73,7 +73,7 @@
 
               <div class="row justify-content-end">
                 <div class="col-md-2">
-                  <button type="button" class="btn btn-primary"  data-toggle="modal" data-target="#addStudent">Add New Student(s)</button>
+                  <button type="button" class="btn btn-primary"  data-toggle="modal" data-target="#addStudent">学生を追加</button>
                 </div>
               </div>
 
@@ -85,7 +85,7 @@
                
 
                     <div class="modal-header">
-                      <h4 class="modal-title">Add New Student(s)</h4>
+                      <h4 class="modal-title">学生を追加</h4>
                       <button type="button" class="close" data-dismiss="modal">&times;</button>
                     </div>
                
@@ -95,7 +95,7 @@
                         @csrf
 
                         <div class="form-group row">
-                            <label for="add-student" class="col-md-4 col-form-label text-md-right">{{ __('Student to add') }}</label>
+                            <label for="add-student" class="col-md-4 col-form-label text-md-right">{{ __('追加する学生') }}</label>
 
                             <div class="col-md-6">
                                 <input id="add-student" type="text" class="form-control @error('add-student') is-invalid @enderror" name="add-student" value="{{ old('add-student') }}" required autocomplete="add-student" autofocus>
@@ -110,9 +110,9 @@
                         </div>
 
                         <div class="form-group row mb-0">
-                            <div class="col-md-2 offset-md-5">
+                            <div class="col-md-3 offset-md-5">
                                 <button type="submit" class="btn btn-primary">
-                                    {{ __('Add') }}
+                                    {{ __('追加') }}
                                 </button>
 
                             </div>
@@ -127,13 +127,15 @@
                     </div>
 
                     <div class="card-footer">
-                      <h5 class="text-bold">Tips</h5>
-                      <p class="mb-0">You can add multiple students at one time using comma(,).</p>
-                      <p>e.g: j20001aa,j20002bb,j20011xx</p>
+                      <h5 class="text-bold">説明</h5>
+                      <p class="mb-0">半角コンマ（,）で区切し、複数の学生を一括追加することができます</p>
+                      <p>例: j20001aa,j20002bb,j20011xx</p>
                       
                       <p>
-                        All the students being added will belong to <br>
-                        <strong>Student</strong> role of Lab <strong>{{ $user->lab->lab_name }}</strong> defaultly.</p>
+                        新しく追加される学生はディフォルトで<br>
+                        <strong>{{ $user->lab->lab_name }}ゼミ</strong>の<strong>学生</strong>役割/権限<br>
+                        で追加されます
+                      </p>
                     </div>
                
                   </div>
@@ -150,12 +152,12 @@
                
 
                     <div class="modal-header">
-                      <h4 class="modal-title">Delete Student</h4>
+                      <h4 class="modal-title">学生を削除</h4>
                       <button type="button" class="close" data-dismiss="modal">&times;</button>
                     </div>
                
                     <div class="modal-body">
-                      <h5 style="text-align: center">Remove This Student?</h5>
+                      <h5 style="text-align: center">この学生（ユーザー）を削除しますか</h5>
 
                       <form method="POST" action="/admin/stum/del">
                         @csrf
@@ -164,15 +166,16 @@
 
 
                           <button style="display:block; margin: auto" type="submit" class="btn btn-danger">
-                              {{ __('Delete') }}
+                              {{ __('削除') }}
                           </button>
 
                       </form>
 
                       <hr>
-                      <h5 style="text-align: center; color: red">Warning</h5>
-                      <h6 style="text-align: center; color: red">This action will remove the student record from the database
-                        and it is unrecoverable. After the removement, you have to readd the student even if the student id is the same.</h6>
+                      <h5 style="text-align: center; color: red">警告</h5>
+                      <h6 style="text-align: center; color: red">
+                        この操作はデータベースに保存している学生（ユーザー）レコードを削除し、回復不能な操作です。<br>
+                        削除したら、同じ学籍番号の学生でも問わず、もう一度追加する必要があります。
                     </div>
                
                   </div>

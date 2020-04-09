@@ -6,25 +6,25 @@
         <ul class="navbar-nav">
             
             <li class="nav-item">
-                <a class="nav-link" id="home" v-bind:href="home">Home</a>
+                <a class="nav-link" id="home" v-bind:href="home">ホーム</a>
             </li>
             
             <li class="nav-item">
-                <a class="nav-link" id="nsl" v-bind:href="nsl">NSL Detail</a>
+                <a class="nav-link" id="nsl" v-bind:href="nsl">NSL 明細</a>
             </li>
             
             <li class="nav-item">
-                <a class="nav-link" id="myip" v-bind:href="myip">My IPs</a>
+                <a class="nav-link" id="myip" v-bind:href="myip">私のIP</a>
             </li>
             
             <li class="nav-item">
-                <a class="nav-link" id="profile" v-bind:href="profile">Profile</a>
+                <a class="nav-link" id="profile" v-bind:href="profile">プロフィール編集</a>
             </li>
             
             <hr>
             
             <li class="nav-item">
-                <a class="nav-link" id="admin_stum" v-bind:href="admin_stum">Students Management</a>
+                <a class="nav-link" id="admin_stum" v-bind:href="admin_stum">学生管理</a>
             </li>
             
 <!--

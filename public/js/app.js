@@ -2056,7 +2056,7 @@ __webpack_require__.r(__webpack_exports__);
       users.pop();
       ips.forEach(function (ip, index) {
         document.getElementById('ip-' + ip).classList.add('table-primary');
-        document.getElementById('ip-' + ip).setAttribute("title", "IP: 172.22.1." + ip + "\n" + "User: " + users[index]);
+        document.getElementById('ip-' + ip).setAttribute("title", "IP: 172.22.1." + ip + "\n" + "使用者: " + users[index]);
       });
     }
   }
@@ -37650,7 +37650,7 @@ var render = function() {
           }
         }
       },
-      [_vm._v("Edit")]
+      [_vm._v("編集")]
     ),
     _vm._v("\n\n     \n    "),
     _c(
@@ -37669,7 +37669,7 @@ var render = function() {
           }
         }
       },
-      [_vm._v("Delete")]
+      [_vm._v("削除")]
     )
   ])
 }
@@ -37712,7 +37712,7 @@ var render = function() {
           }
         }
       },
-      [_vm._v("Edit")]
+      [_vm._v("編集")]
     ),
     _vm._v("\n\n     \n    "),
     _c(
@@ -37731,7 +37731,7 @@ var render = function() {
           }
         }
       },
-      [_vm._v("Delete")]
+      [_vm._v("削除")]
     )
   ])
 }
@@ -37811,7 +37811,7 @@ var render = function() {
         _c(
           "a",
           { staticClass: "nav-link", attrs: { id: "home", href: _vm.home } },
-          [_vm._v("Home")]
+          [_vm._v("ホーム")]
         )
       ]),
       _vm._v(" "),
@@ -37819,7 +37819,7 @@ var render = function() {
         _c(
           "a",
           { staticClass: "nav-link", attrs: { id: "nsl", href: _vm.nsl } },
-          [_vm._v("NSL Detail")]
+          [_vm._v("NSL 明細")]
         )
       ]),
       _vm._v(" "),
@@ -37827,7 +37827,7 @@ var render = function() {
         _c(
           "a",
           { staticClass: "nav-link", attrs: { id: "myip", href: _vm.myip } },
-          [_vm._v("My IPs")]
+          [_vm._v("私のIP")]
         )
       ]),
       _vm._v(" "),
@@ -37838,7 +37838,7 @@ var render = function() {
             staticClass: "nav-link",
             attrs: { id: "profile", href: _vm.profile }
           },
-          [_vm._v("Profile")]
+          [_vm._v("プロフィール編集")]
         )
       ]),
       _vm._v(" "),
@@ -37851,7 +37851,7 @@ var render = function() {
             staticClass: "nav-link",
             attrs: { id: "admin_stum", href: _vm.admin_stum }
           },
-          [_vm._v("Students Management")]
+          [_vm._v("学生管理")]
         )
       ])
     ])
@@ -37888,7 +37888,7 @@ var render = function() {
           id: "edit-" + _vm.studentname
         }
       },
-      [_vm._v("\n    Details")]
+      [_vm._v("\n    明細")]
     ),
     _vm._v("\n\n     \n    "),
     _c(
@@ -37907,7 +37907,7 @@ var render = function() {
           }
         }
       },
-      [_vm._v("\n    Delete")]
+      [_vm._v("\n    削除")]
     )
   ])
 }

@@ -18,20 +18,20 @@
 
 
         <div class="col-md-9">
-          <h3>Profile of {{ $p_user->name }}</h3>
+          <h3>{{ $p_user->name }}のプロフィール</h3>
 
             <div class="row mb-4">
                 
                 <div class="col-md-6">
                     <div class="card">
-                        <div class="card-header">Student Info</div>
+                        <div class="card-header">学生情報</div>
                         <div class="card-body">
 
                           <form method="POST" action="/admin/stum/profile/update">
                             @csrf
     
                             <div class="form-group row">
-                              <label for="name" class="col-md-3 offset-1 col-form-label text-md-left">{{ __('Name') }}</label>
+                              <label for="name" class="col-md-3 offset-1 col-form-label text-md-left">{{ __('名前') }}</label>
                               <div class="col-md-6">
                                   <input id="name" type="text" class="form-control @error('name') is-invalid @enderror" name="name" value="{{ old('name') ?? $p_user->name }}" required autocomplete="name" autofocus>
                                   @error('name')
@@ -43,9 +43,9 @@
                           </div>
 
                           <div class="form-group row">
-                            <label for="tuisid" class="col-md-3 offset-1 col-form-label text-md-left">{{ __('TUIS ID') }}</label>
+                            <label for="tuisid" class="col-md-3 offset-1 col-form-label text-md-left">{{ __('学籍番号') }}</label>
                             <div class="col-md-6">
-                                <input id="tuisid" type="text" class="form-control @error('tuisid') is-invalid @enderror" name="tuisid" value="{{ old('tuisid') ?? $p_user->tuisid }}" required autocomplete="tuisid" autofocus>
+                                <input id="tuisid" type="text" class="form-control @error('tuisid') is-invalid @enderror" name="tuisid" value="{{ old('tuisid') ?? $p_user->tuisid }}" required autocomplete="tuisid" readonly>
                                 @error('tuisid')
                                     <span class="invalid-feedback" role="alert">
                                         <strong>{{ $message }}</strong>
@@ -55,7 +55,7 @@
                         </div>
                         
                         <div class="form-group row">
-                          <label for="role" class="col-md-3 offset-1 col-form-label text-md-left">{{ __('Role') }}</label>
+                          <label for="role" class="col-md-3 offset-1 col-form-label text-md-left">{{ __('役割/権限') }}</label>
                           <div class="col-md-6">
                             <select class="form-control" id="role" name="role" required>
                               @foreach ($roles as $role)
@@ -75,7 +75,7 @@
                         </div>
 
                         <div class="form-group row">
-                          <label for="lab" class="col-md-3 offset-1 col-form-label text-md-left">{{ __('Lab') }}</label>
+                          <label for="lab" class="col-md-3 offset-1 col-form-label text-md-left">{{ __('ゼミ') }}</label>
                           <div class="col-md-6">
                               <select class="form-control" id="lab" name="lab" required>
                                 @foreach ($labs as $lab)
@@ -98,7 +98,7 @@
                             <div class="form-group row mb-0">
                                 <div class="col-md-6 offset-md-4">
                                     <button type="submit" class="btn btn-primary">
-                                        {{ __('Save') }}
+                                        {{ __('保存') }}
                                     </button>
                                 </div>
                             </div>
@@ -115,22 +115,22 @@
 
                 <div class="col-md-6">
                     <div class="card">
-                        <div class="card-header">Hosts/IPs</div>
+                        <div class="card-header">所持のIP</div>
 
                         <div class="card-body">
                             
                             <h4 class="mb-3">
-                                {{ $p_user->name }} have 
+                                {{ $p_user->name }} は 
                                     <strong>{{ $p_user->ips()->count() }}</strong>
-                                host(s)/IP(s)
+                                個のIP/ホストを使用しています
                             </h4>
 
                             <table class="table table-hover">
                               <thead>
                                 <tr>
-                                  <th>Address</th>
-                                  <th>Hostname</th>
-                                  <th>Leased At</th>
+                                  <th>IPアドレス</th>
+                                  <th>ホスト名</th>
+                                  <th>登録日</th>
                                 </tr>
                               </thead>
                               <tbody>
@@ -145,8 +145,8 @@
                             </table>
                             
                             <div class="row justify-content-end">
-                              <div class="col-md-3">
-                                <button type="button" class="btn btn-primary"  data-toggle="modal" data-target="#addIp">Add New IP</button>
+                              <div class="col-md-4">
+                                <button type="button" class="btn btn-primary"  data-toggle="modal" data-target="#addIp">使用するIPを追加</button>
                               </div>
                             </div>
                         </div>
@@ -175,7 +175,7 @@
      
 
           <div class="modal-header">
-            <h4 class="modal-title">Add New IP</h4>
+            <h4 class="modal-title">使用するIPを追加</h4>
             <button type="button" class="close" data-dismiss="modal">&times;</button>
           </div>
      
@@ -187,7 +187,7 @@
               <input id="name" type="hidden" class="form-control @error('name') is-invalid @enderror" name="name" value="{{ $p_user->name }}" required autocomplete="name" autofocus>
 
                 <div class="form-group row">
-                <label for="ip-addr" class="col-md-4 col-form-label text-md-right">{{ __('IP address') }}</label>
+                <label for="ip-addr" class="col-md-4 col-form-label text-md-right">{{ __('IPアドレス') }}</label>
 
                 <div class="col-md-6">
                     <input id="ip-addr" type="text" class="form-control @error('ip-addr') is-invalid @enderror" name="ip-addr" value="{{ old('ip-addr') }}" required autocomplete="ip-addr" autofocus>
@@ -202,7 +202,7 @@
             </div>
 
               <div class="form-group row">
-                <label for="hostname" class="col-md-4 col-form-label text-md-right">{{ __('Hostname') }}</label>
+                <label for="hostname" class="col-md-4 col-form-label text-md-right">{{ __('ホスト名') }}</label>
 
                 <div class="col-md-6">
                     <input id="hostname" type="text" class="form-control @error('hostname') is-invalid @enderror" name="hostname" value="{{ old('hostname') }}" autocomplete="hostname">
@@ -216,7 +216,7 @@
               </div>
 
               <div class="form-group row">
-                <label for="description" class="col-md-4 col-form-label text-md-right">{{ __('Description') }}</label>
+                <label for="description" class="col-md-4 col-form-label text-md-right">{{ __('概要') }}</label>
 
                 <div class="col-md-6">
                     <input id="description" type="text" class="form-control @error('description') is-invalid @enderror" name="description" value="{{ old('description') }}" autocomplete="description">
@@ -224,9 +224,9 @@
               </div>
 
               <div class="form-group row mb-0">
-                  <div class="col-md-2 offset-md-5">
+                  <div class="col-md-3 offset-md-5">
                       <button type="submit" class="btn btn-primary">
-                          {{ __('Add') }}
+                          {{ __('追加') }}
                       </button>
 
                   </div>

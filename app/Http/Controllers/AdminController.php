@@ -24,7 +24,7 @@ class AdminController extends Controller
         $user = auth()->user();
 
         if ($user->role->role_name == 'Student') {
-            abort(403, 'Forbidden, You are not the administrator');
+            abort(403, '操作禁止, あなたは管理者ではありません');
         }
         
         $students = User::all();
@@ -52,7 +52,7 @@ class AdminController extends Controller
 
         $target_user = User::where('tuisid', $data['tuisid'])->first();
         if ( !$target_user ) {
-            abort(403, 'User Not Found.');
+            abort(403, 'この学生は登録されていません');
         }
         $target_role = Role::where('role_name', $data['role'])->first()->id;
         $target_lab = Lab::where('lab_name', $data['lab'])->first()->id;
@@ -74,7 +74,7 @@ class AdminController extends Controller
             return redirect("/admin/stum");
         }
 
-        throw ValidationException::withMessages(['admin_stuprofile_success' => 'Update success.']);
+        throw ValidationException::withMessages(['admin_stuprofile_success' => '更新が成功しました']);
 
     }
 
@@ -90,11 +90,11 @@ class AdminController extends Controller
         $target_ip = IP::where('address', $data['ip-addr'])->first();
 
         if ( !$target_ip ) {
-            abort(403, 'IP Not Found.');
+            abort(403, 'NSLのIPではありません');
         }
 
         if ( $target_ip->user_id && $target_ip->user_id != $user->id ) {
-            throw ValidationException::withMessages(['ip-registered' => 'This IP has been used by others']);
+            throw ValidationException::withMessages(['ip-registered' => 'このIPは他の人に使われています']);
         };
 
         DB::table('i_p_s')
@@ -119,10 +119,10 @@ class AdminController extends Controller
         $target_user = DB::table('users')->where('name', $data['del-student'])->first();
         
         if ( !$target_user ) {
-            abort(403, 'User Not Found.');
+            abort(403, 'この学生は登録されていません');
         }
         if ( $target_user->lab_id != $user->lab_id ) {
-            abort(403, 'This student is not under your management.');
+            abort(403, 'この学生はあなたの管理下にありません。');
         };
 
         DB::table('users')
@@ -156,7 +156,7 @@ class AdminController extends Controller
         }
         if (!empty($v_registered_students_array)) {
             $v_registered_students = implode(" ",$v_registered_students_array);
-            throw ValidationException::withMessages(['student-registered' => "Student $v_registered_students has already been registered."]);
+            throw ValidationException::withMessages(['student-registered' => "学籍番号 $v_registered_students は既に登録されています"]);
         }
 
         foreach ($students_array as $student) {

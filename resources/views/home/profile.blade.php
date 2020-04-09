@@ -19,12 +19,12 @@
         <div class="col-md-9">
             
           <div class="card">
-            <div class="card-header">My Profile</div>
+            <div class="card-header">私のプロフィール</div>
             <div class="card-body">
                 
               <div class="row align-baseline">
                 <div class="col-md-2 offset-2">
-                  <h4>Name:</h4>
+                  <h4>名前:</h4>
                 </div>
                 <div class="col-md-6">
                   <h4>{{ $user->name }}</h4>
@@ -33,7 +33,7 @@
 
               <div class="row">
                 <div class="col-md-2 offset-2">
-                  <h4>TUIS ID:</h4>
+                  <h4>学籍番号:</h4>
                 </div>
                 <div class="col-md-6">
                   <h4>{{ $user->tuisid }}</h4>
@@ -42,7 +42,7 @@
 
               <div class="row">
                 <div class="col-md-2 offset-2">
-                  <h4>Role:</h4>
+                  <h4>役割/権限:</h4>
                 </div>
                 <div class="col-md-6">
                   <h4>{{ $user->role->role_name }}</h4>
@@ -51,7 +51,7 @@
 
               <div class="row">
                 <div class="col-md-2 offset-2">
-                  <h4>Lab:</h4>
+                  <h4>ゼミ:</h4>
                 </div>
                 <div class="col-md-6">
                   <h4>{{ $user->lab->lab_name }}</h4>
@@ -59,8 +59,8 @@
               </div>
 
               <div class="row justify-content-end">
-                <div class="col-md-1">
-                  <button type="button" class="btn btn-primary"  data-toggle="modal" data-target="#editProfile">Edit</button>
+                <div class="col-md-2">
+                  <button type="button" class="btn btn-primary"  data-toggle="modal" data-target="#editProfile">編集</button>
                 </div>
               </div>
 
@@ -71,7 +71,7 @@
                   <div class="modal-content">
                
                     <div class="modal-header">
-                      <h4 class="modal-title">Edit Profile</h4>
+                      <h4 class="modal-title">プロフィールを編集</h4>
                       <button type="button" class="close" data-dismiss="modal">&times;</button>
                     </div>
                
@@ -81,7 +81,7 @@
                         @csrf
 
                         <div class="form-group row">
-                            <label for="name" class="col-md-4 col-form-label text-md-right">{{ __('Name') }}</label>
+                            <label for="name" class="col-md-4 col-form-label text-md-right">{{ __('名前') }}</label>
 
                             <div class="col-md-6">
                                 <input id="name" type="text" class="form-control @error('name') is-invalid @enderror" name="name" value="{{ old('name') ?? $user->name }}" required autocomplete="name" autofocus>
@@ -95,7 +95,7 @@
                         </div>
 
                         <div class="form-group row">
-                          <label for="tuisid" class="col-md-4 col-form-label text-md-right">{{ __('TUIS ID') }}</label>
+                          <label for="tuisid" class="col-md-4 col-form-label text-md-right">{{ __('学籍番号') }}</label>
 
                           <div class="col-md-6">
                               <input id="tuisid" type="text" class="form-control @error('tuisid') is-invalid @enderror" name="tuisid" value="{{ old('tuisid') ?? $user->tuisid }}" required autocomplete="tuisid" readonly>
@@ -109,7 +109,7 @@
                         </div>
 
                         <div class="form-group row">
-                          <label for="role" class="col-md-4 col-form-label text-md-right">{{ __('Role') }}</label>
+                          <label for="role" class="col-md-4 col-form-label text-md-right">{{ __('役割/権限') }}</label>
 
                           <div class="col-md-6">
                               <input id="role" type="text" class="form-control @error('role') is-invalid @enderror" name="role" value="{{ old('role') ?? $user->role->role_name }}" required autocomplete="role" readonly>
@@ -123,7 +123,7 @@
                         </div>
 
                         <div class="form-group row">
-                          <label for="lab" class="col-md-4 col-form-label text-md-right">{{ __('Lab') }}</label>
+                          <label for="lab" class="col-md-4 col-form-label text-md-right">{{ __('ゼミ') }}</label>
 
                           <div class="col-md-6">
                             <select class="form-control" id="lab">
@@ -139,9 +139,9 @@
                         </div>
 
                         <div class="form-group row mb-0">
-                            <div class="col-md-2 offset-md-5">
+                            <div class="col-md-3 offset-md-5">
                                 <button type="submit" class="btn btn-primary">
-                                    {{ __('Save') }}
+                                    {{ __('保存') }}
                                 </button>
 
                             </div>
