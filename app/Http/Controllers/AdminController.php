@@ -129,6 +129,15 @@ class AdminController extends Controller
         ->where('id', $target_user->id)
         ->delete();
 
+        DB::table('i_p_s')
+        ->where('user_id', $target_user->id)
+        ->update(['user_id' => null,
+        'last_modified' => $user->id,
+        'hostname' => null,
+        'description' => null,
+        'updated_at' => Carbon::now()
+      ]);
+
         return redirect("/admin/stum");
 
     }

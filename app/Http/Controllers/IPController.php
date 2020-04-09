@@ -59,7 +59,7 @@ class IPController extends Controller
         }
         if ( $target_ip->user_id != $user->id ) {
             abort(403, 'Illegal operation.');
-//          throw ValidationException::withMessages(['edit-err' => 'Illegal operation']);
+        //  throw ValidationException::withMessages(['edit-err' => 'Illegal operation']);
         };
     
         DB::table('i_p_s')
@@ -86,7 +86,7 @@ class IPController extends Controller
         }
         if ( $target_ip->user_id != $user->id ) {
             abort(403, 'Illegal operation.');
-//          throw ValidationException::withMessages(['del-err' => 'Illegal operation']);
+        //  throw ValidationException::withMessages(['del-err' => 'Illegal operation']);
         };
 
         DB::table('i_p_s')
