@@ -36,8 +36,10 @@ class AdminController extends Controller
         $a_user = auth()->user();
         $p_user = User::where('name', $user)->with('role','ips')->first();
 
-        $labs = Lab::all()->where('id', '>', 1);
-        $roles = Role::all()->where('id', '>', 1);
+    //  $roles = Role::all()->where('id', '>', 1);
+    //   $labs = Lab::all()->where('id', '>', 1);
+        $labs = Lab::all();
+        $roles = Role::all();
         
         return view('admin.stuprofile', compact('a_user', 'p_user', 'labs', 'roles'));
     }
@@ -55,11 +57,23 @@ class AdminController extends Controller
             abort(403, 'User Not Found.');
         }
         $target_role = Role::where('role_name', $data['role'])->first()->id;
+        if (!$target_role) {
+            abort(403, 'Role not Found.');
+        }
         $target_lab = Lab::where('lab_name', $data['lab'])->first()->id;
+        if (!$target_lab) {
+            abort(403, 'Lab not Found.');
+        }
+
 
         $name_changed = '';
         if ($target_user->name != $data['name']) {
             $name_changed = true;
+        }
+
+        $user = auth()->user();
+        if ($user->role->role_name != 'Admin' && ($data['role'] == 'Admin' || $data['role'] == 'Teacher')) {
+            abort(403, $data['role'] + ' role can only define by admin');
         }
 
         DB::table('users')
