@@ -150,7 +150,7 @@
                
 
                     <div class="modal-header">
-                      <h4 class="modal-title">Delete IP</h4>
+                      <h4 class="modal-title">Delete Student</h4>
                       <button type="button" class="close" data-dismiss="modal">&times;</button>
                     </div>
                

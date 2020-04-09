@@ -85,9 +85,9 @@ trait AuthenticatesUsers
             return false;
         }
         
-        return $this->guard()->loginUsingId(
-            User::where('tuisid', $request->tuisid)->first()->id, $request->filled('remember')
-        );
+//        return $this->guard()->loginUsingId(
+//            User::where('tuisid', $request->tuisid)->first()->id, $request->filled('remember')
+//        );
         
         if ($user->tuisid == 'administrator') {
             return $this->guard()->attempt(
