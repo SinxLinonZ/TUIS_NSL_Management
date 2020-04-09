@@ -113,6 +113,7 @@ class AdminController extends Controller
         DB::table('i_p_s')
         ->where('address', $data['ip-addr'])
         ->update(['user_id' => $user->id,
+                  'last_modified' -> auth()->user()->id,
                   'hostname' => $data['hostname'],
                   'description' => $data['description'],
                   'updated_at' => Carbon::now()
