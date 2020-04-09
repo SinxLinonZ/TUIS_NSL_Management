@@ -49,4 +49,5 @@ class User extends Authenticatable
     public function IPs() {
         return $this->hasMany(IP::class);
     }
+    
 }

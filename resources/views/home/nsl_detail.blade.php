@@ -26,6 +26,7 @@
                     <th>Using by</th>
                     <th>of Lab.</th>
                     <th>Modified at</th>
+                    <th>Modified by</th>
                     @if ($user->role->role_name == 'Admin' || $user->role->role_name == 'Teacher')
                     <th>Action</th>
                     @endif
@@ -33,35 +34,39 @@
                 </thead>
                 <tbody>
 
-                    @for ($i = 0; $i < 254; $i++)
+                    @foreach ($ips as $ip)
+                        
                     <tr>
-                        <td>172.22.1.{{$i+1}}</td>
-                        <td id="hostname-{{ $i+1 }}">{{ $ips[$i]->hostname}}</td>
-                        <td>{{ $ips[$i]->description }}</td>
+                        <td>{{$ip->address}}</td>
+                        <td id="hostname-{{ $ip->id }}">{{ $ip->hostname}}</td>
+                        <td>{{ $ip->description }}</td>
                         <td>
-                            {{ $ips[$i]->user['name'] }}
+                            {{ $ip->user['name'] }}
 
-                            @if ( $ips[$i]->user['role']['role_name'] == 'Admin' || $ips[$i]->user['role']['role_name'] == "Teacher")
-                                <span class="badge badge-secondary"> {{ $ips[$i]->user['role']['role_name'] }} </span>
+                            @if ( $ip->user['role']['role_name'] == 'Admin' || $ip->user['role']['role_name'] == "Teacher")
+                                <span class="badge badge-secondary"> {{ $ip->user['role']['role_name'] }} </span>
                             @endif
 
                         </td>
-                        <td>{{ $ips[$i]->user['lab']['lab_name'] }}</td>
-                        @if ($ips[$i]->user['name'])
-                        <td>{{ $ips[$i]->updated_at }}</td>
+                        <td>{{ $ip->user['lab']['lab_name'] }}</td>
+                        
+                        @if ($ip->user['name'])
+                        <td>{{ $ip->updated_at }}</td>
+                        <td>{{ $ip->wasChangedBy->name }}</td>
                         @else
+                        <td></td>
                         <td></td>
                         @endif
                         
                         @if ($user->role->role_name == 'Admin' || $user->role->role_name == 'Teacher')
                         <td>
                           <nsledit
-                          tagid="{{$i+1}}"></nsledit>
+                          tagid="{{$ip->id}}"></nsledit>
                         </td>
                         @endif
                         
                       </tr>
-                    @endfor
+                    @endforeach
 
                 </tbody>
             </table>
