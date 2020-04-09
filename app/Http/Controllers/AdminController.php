@@ -73,7 +73,7 @@ class AdminController extends Controller
 
         $user = auth()->user();
         if ($user->role->role_name != 'Admin' && ($data['role'] == 'Admin' || $data['role'] == 'Teacher')) {
-            abort(403, $data['role'] + ' role can only define by admin');
+            abort(403, 'Admin/Teacher role can only define by admin');
         }
 
         DB::table('users')
