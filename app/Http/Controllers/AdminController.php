@@ -118,12 +118,15 @@ class AdminController extends Controller
 
         $target_user = DB::table('users')->where('name', $data['del-student'])->first();
         
+        if ($user->role->role_name != '管理者') {
+            if ( $target_user->lab_id != $user->lab_id ) {
+                abort(403, 'この学生はあなたの管理下にありません。');
+            };
+        }
+
         if ( !$target_user ) {
             abort(403, 'この学生は登録されていません');
         }
-        if ( $target_user->lab_id != $user->lab_id ) {
-            abort(403, 'この学生はあなたの管理下にありません。');
-        };
 
         DB::table('users')
         ->where('id', $target_user->id)

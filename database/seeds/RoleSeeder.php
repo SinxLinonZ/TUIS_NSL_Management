@@ -14,10 +14,10 @@ class RoleSeeder extends Seeder
     {
 
         $roles = array(
-            array('role_name' => 'Admin'),
-            array('role_name' => 'Student'),
-            array('role_name' => 'Teacher'),
-            array('role_name' => 'Lab_Admin')
+            array('role_name' => '管理者'),
+            array('role_name' => '学生'),
+            array('role_name' => '先生'),
+            array('role_name' => 'ゼミ長')
         );
 
         DB::table('roles')->insert($roles);

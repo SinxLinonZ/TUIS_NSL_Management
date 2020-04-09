@@ -15,10 +15,10 @@ class LabSeeder extends Seeder
 
         $labs = array(
             array('lab_name' => 'NetTech'),
-            array('lab_name' => 'Moriguchi'),
-            array('lab_name' => 'Hanada'),
-            array('lab_name' => 'Iseki'),
-            array('lab_name' => 'Waseda')
+            array('lab_name' => '森口'),
+            array('lab_name' => '花田'),
+            array('lab_name' => '井関'),
+            array('lab_name' => '早稲田')
         );
 
         DB::table('labs')->insert($labs);
