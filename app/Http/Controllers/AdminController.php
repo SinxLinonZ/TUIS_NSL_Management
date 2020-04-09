@@ -71,8 +71,8 @@ class AdminController extends Controller
         }
 
         $user = auth()->user();
-        if ($user->role->role_name != 'Admin' && ($data['role'] == 'Admin' || $data['role'] == 'Teacher')) {
-            abort(403, $data['role'] + ' の役割/権限を与えられるのは管理者だけです');
+        if ($user->role->role_name != '管理者' && ($data['role'] == '管理者' || $data['role'] == '先生')) {
+            abort(403, '管理者または先生の役割/権限を与えられるのは管理者だけです');
         }
 
         DB::table('users')
