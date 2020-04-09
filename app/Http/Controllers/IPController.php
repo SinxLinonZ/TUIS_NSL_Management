@@ -37,6 +37,7 @@ class IPController extends Controller
         ->where('address', $data['ip-addr'])
         ->update(['user_id' => $user->id,
                   'hostname' => $data['hostname'],
+                  'last_modified' => $user->id,
                   'description' => $data['description'],
                   'updated_at' => Carbon::now()
                 ]);
@@ -65,6 +66,7 @@ class IPController extends Controller
         DB::table('i_p_s')
         ->where('address', $data['edit-ip'])
         ->update(['hostname' => $data['edit-hostname'],
+                  'last_modified' => $user->id,
                   'description' => $data['description'],
                   'updated_at' => Carbon::now()
                 ]);
@@ -93,6 +95,7 @@ class IPController extends Controller
         ->where('address', $data['del-ip'])
         ->update(['user_id' => null,
                   'hostname' => null,
+                  'last_modified' => $user->id,
                   'description' => null,
                   'updated_at' => Carbon::now()
                 ]);
@@ -105,7 +108,7 @@ class IPController extends Controller
     public function edit_admin() {
         $user = auth()->user();
 
-        if ($user->role->role_name != 'Admin' && $user->role->role_name != 'Teacher' ) {
+        if ($user->role->role_name != '管理者' && $user->role->role_name != '先生' ) {
             abort(403, '不正操作です');
         }
         
@@ -129,6 +132,7 @@ class IPController extends Controller
         ->where('address', $data['edit-ip'])
         ->update(['hostname' => $data['edit-hostname'],
                   'user_id' => $edit_user->id,
+                  'last_modified' => $user->id,
                   'description' => $data['description'],
                   'updated_at' => Carbon::now()
                 ]);
@@ -139,7 +143,7 @@ class IPController extends Controller
     public function del_admin() {
         $user = auth()->user();
 
-        if ($user->role->role_name != 'Admin' && $user->role->role_name != 'Teacher' ) {
+        if ($user->role->role_name != '管理者' && $user->role->role_name != '先生' ) {
             abort(403, '不正操作です');
         }
 
@@ -155,6 +159,7 @@ class IPController extends Controller
         DB::table('i_p_s')
         ->where('address', $data['del-ip'])
         ->update(['user_id' => null,
+                  'last_modified' => $user->id,
                   'hostname' => null,
                   'description' => null,
                   'updated_at' => Carbon::now()
