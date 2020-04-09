@@ -27,7 +27,7 @@
                     <th>所属ゼミ</th>
                     <th>登録日</th>
                     <th>登録者</th>
-                    @if ($user->role->role_name == 'Admin' || $user->role->role_name == 'Teacher')
+                    @if ($user->role->role_name == '管理者' || $user->role->role_name == '先生')
                     <th>操作</th>
                     @endif
                   </tr>
@@ -43,7 +43,7 @@
                         <td>
                             {{ $ip->user['name'] }}
 
-                            @if ( $ip->user['role']['role_name'] == 'Admin' || $ip->user['role']['role_name'] == "Teacher")
+                            @if ( $ip->user['role']['role_name'] == '管理者' || $ip->user['role']['role_name'] == "先生")
                                 <span class="badge badge-secondary"> {{ $ip->user['role']['role_name'] }} </span>
                             @endif
 
@@ -59,7 +59,7 @@
                         @endif
                         
 
-                        @if ($user->role->role_name == 'Admin' || $user->role->role_name == 'Teacher')
+                        @if ($user->role->role_name == '管理者' || $user->role->role_name == '先生')
                         <td>
                           <nsledit
                           tagid="{{$ip->id}}"></nsledit>
@@ -72,7 +72,7 @@
                 </tbody>
             </table>
             
-            @if ($user->role->role_name == 'Admin' || $user->role->role_name == 'Teacher')
+            @if ($user->role->role_name == '管理者' || $user->role->role_name == '先生')
             <!-- Delete IP Modal -->
             <div class="modal fade" id="delIp">
               <div class="modal-dialog">
